@@ -1,1 +1,2 @@
-# Trabalho CG\nOs arquivos antigos de códigos para referência devem ser colocados na pasta Old.
+# Trabalho CG
+Os arquivos antigos de códigos para referência devem ser colocados na pasta Old.
