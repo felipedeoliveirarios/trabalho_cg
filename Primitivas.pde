@@ -20,6 +20,12 @@ class Vertice{
 		this.z = z;
 	}
 
+	/*
+	+==========================================================================
+	|		Método estático que calcula e retorna o vértice médio de um array
+	|		de vértices.
+	+==========================================================================
+	*/
 	static Vertice calculaMedia(Vertice[] vertices){
 		int x = 0;
 		int y = 0;
@@ -60,6 +66,8 @@ class Poligono{
 	public Vertice[] vertices;
 	public Aresta[] arestas;
 	public Vertice centro;
+	public Color corDaLinha;
+	public Color corDePreenchimento;
 
 	public Poligono(Vertice[] vertices, Aresta[] arestas){
 		this.vertice = vertices;
