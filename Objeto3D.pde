@@ -14,8 +14,11 @@ class Objeto3D{
 	public Objeto3D(Poliedro poliedro){
 		this.poliedro = poliedro;
 		this.escala = new Matriz(1, 3);
+		this.escala.dados[0] = {1.0, 0.0, 0.0};
 		this.rotacao = new Matriz(1, 3);
+		this.rotacao.dados[0] = {0.0, 0.0, 0.0};
 		this.translacao = new Matriz(1, 3);
+		this.translacao.dados[0] = {0.0, 0.0, 0.0};
 		this.renderizador = Renderizador.PERSPECTIVA_COM_UM_PF;
 	}
 
@@ -58,40 +61,3 @@ class Objeto3D{
 	public Poliedro aplicarOperacoes(){
 
 	}
-
-	/*
-	+==========================================================================
-	|		Método que renderiza o objeto 3D atual de acordo com o algoritmo
-	|		especificado (padrão: PERSPECTIVA_COM_UM_PF)
-	+==========================================================================
-	*/
-	public void renderizar(){
-
-	}
-
-
-	/*
-	+==========================================================================
-	|		Enum que mantém os nomes dos algoritmos de renderização para uso no
-	|		método renderizar();
-	+==========================================================================
-	*/
-	private Enum Renderizador{
-		CAVALEIRA(0), CABINET(1), ISOMETRICO(2), PERSPECTIVA_COM_UM_PF(3),
-		PERSPECTIVA_COM_DOIS_PF(4);
-
-		private int identificador;
-
-		Renderizador(int identificador){
-			this.identificador = identificador;
-		}
-		/*
-		+======================================================================
-		|		Método que retorna o identificador do enum.
-		+======================================================================
-		*/
-		public int getIdentificador(){
-			return this.identificador;
-		}
-	}
-}

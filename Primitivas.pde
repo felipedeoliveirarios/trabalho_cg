@@ -48,12 +48,12 @@ class Vertice{
 +==============================================================================
 */
 class Aresta{
-	public Vertice inicio;
-	public Vertice fim;
+	public int indiceInicio;
+	public int indiceFim;
 
-	public Aresta(Vertice inicio, Vertice fim){
-		this.inicio = inicio;
-		this.fim = fim;
+	public Aresta(int inicio, int fim){
+		this.indiceInicio = indiceInicio;
+		this.indiceFim = indiceFim;
 	}
 }
 
@@ -82,10 +82,10 @@ class Poligono{
 +==============================================================================
 */
 class Face{
-	public int[] indiceVertices;
-	public int[] indiceArestas;
-	public Vertice centro;
-	public Color Preenchimento;
+	public int[] indiceVertices; // Índice dos vértices que compõem a face.
+	public int[] indiceArestas; // Índice das arestas que compõem a face.
+	public Vertice centro; // Vértice central da face.
+	public Color Preenchimento; // Cor RGBA de preenchimento da face.
 
 	public Face(int[] indiceVertices, int[] indiceArestas){
 		this.indiceVertices = indiceVertices;
@@ -194,6 +194,33 @@ class Preenchimento{
 	+==========================================================================
 	*/
 	public static void scanlines(Poligono poligono){
+
+	}
+}
+
+/*
+###############################################################################
+#	CONJUNTO DE MÉTODOS PARA A RENDERIZAÇÃO DE POLIEDROS
+###############################################################################
+*/
+class Renderizador{
+	/*
+	+==========================================================================
+	|		Método que renderiza o objeto 3D de acordo com o algoritmo
+	|		especificado no objeto (padrão: PERSPECTIVA_COM_UM_PF)
+	+==========================================================================
+	*/
+	public static void Renderizar(Objeto3D){
+
+	}
+
+	/*
+	+==========================================================================
+	|		Renderiza um conjunto de objetos 3D ordenados pela coordenada Z do
+	|		ponto central.
+	+==========================================================================
+	*/
+	public static void Renderizar(Objeto3D[]){
 
 	}
 }
