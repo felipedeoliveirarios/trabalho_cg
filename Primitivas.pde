@@ -70,8 +70,26 @@ class Poligono{
 	public Color corDePreenchimento;
 
 	public Poligono(Vertice[] vertices, Aresta[] arestas){
-		this.vertice = vertices;
-		this.aresta = arestas;
+		this.vertices = vertices;
+		this.arestas = arestas;
+	}
+}
+
+/*
++==============================================================================
+|		Uma face de um poliedro definido pelos índices dos vértices e arestas
+|		que a compõem.
++==============================================================================
+*/
+class Face{
+	public int[] indiceVertices;
+	public int[] indiceArestas;
+	public Vertice centro;
+	public Color Preenchimento;
+
+	public Face(int[] indiceVertices, int[] indiceArestas){
+		this.indiceVertices = indiceVertices;
+		this.indiceArestas = indiceArestas;
 	}
 }
 
@@ -81,7 +99,28 @@ class Poligono{
 +==============================================================================
 */
 class Poliedro extends Poligono{
-	public Poligono[] faces;
+	public Face[] faces;
+
+	Poliedro(Vertice[] vertices, Aresta[] arestas){
+		this.vertices = vertices;
+		this.arestas = arestas;
+	}
+
+	/*
+	+==========================================================================
+	|		Método que coloca todos os vértices do poliedro em uma matriz de
+	|		vértices.
+	+==========================================================================
+	*/
+	public Matriz matrizDeVertices(){
+		Matriz matrizDeVertices = new Matriz(vertices.length, 3);
+		for(int indice = 0; indice < vertices.length; indice++){
+			matrizDeVertices.dados[indice][0] = vertices[indice].x;
+			matrizDeVertices.dados[indice][1] = vertices[indice].y;
+			matrizDeVertices.dados[indice][2] = vertices[indice].z;
+		}
+		return matrizDeVertices;
+	}
 }
 
 /*

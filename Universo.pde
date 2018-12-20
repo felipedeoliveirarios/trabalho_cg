@@ -1,8 +1,11 @@
-class Universo extends Objeto3D{
-	
-	public Universo(){
-		this.poliedro = new Poliedro();
-		this.poliedro.faces[] = new Poligono[1];
-		this.poliedro.faces[0] = new Poligono(new Vertice[] = {});
+class Universo {
+	Objeto3D grade;
+	Objeto3D eixoX;
+	Objeto3D eixoY;
+	Objeto3D eixoZ;
+	Objeto3D[] objetos;
+
+	Universo(){
+		Vertice[] verticesGrade = new Vertice[]
 	}
 }
