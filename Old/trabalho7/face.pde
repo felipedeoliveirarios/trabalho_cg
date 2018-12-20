@@ -3,9 +3,9 @@ class Face {
   private int[] pontos;
   private color rgb_fundo;
   private color rgb_linha;
-  private float P[][];
+  private double P[][];
   private int L[][];
-  private float z_medio;
+  private double z_medio;
   private boolean normal;
 
   Face(int pontos[],float rgb[],int L[][]){
@@ -40,12 +40,12 @@ class Face {
     return this.rgb_linha;
   }
   
-  void set_z_medio(float z_medio){
+  void set_z_medio(double z_medio){
     this.z_medio = z_medio;
   }
   
-  float get_z_medio(){
-    return z_medio;
+  int get_z_medio(){
+    return (int)z_medio;
   }
 
   void set_normal(boolean valor){
@@ -56,11 +56,11 @@ class Face {
     return this.normal;
   }
   
-  void set_M_pontos(float P[][]){
+  void set_M_pontos(double P[][]){
       this.P = P;  
   }
   
-  float[][] get_m_p(){
+  double[][] get_m_p(){
     return this.P;
   }
   

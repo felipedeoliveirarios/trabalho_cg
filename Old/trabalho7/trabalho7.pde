@@ -23,9 +23,9 @@ void setup(){
 
 
 
-  float[] fator_S = {0,0,0};
-  float[] fator_T = {0,0,0};
-  float[] fator_R = {0,0,0};
+  double[] fator_S = {(double)0,(double)0,(double)0};
+  double[] fator_T = {(double)0,(double)0,(double)0};
+  double[] fator_R = {(double)0,(double)0,(double)0};
   int flag = -1,flagproj = 0;
   
   
@@ -104,26 +104,27 @@ void projecao(ArrayList<Face> faces,int[] planoObj){
           
               
           
-            int[][] Pontos = new int[faces.get(l).get_pontos().length][4];
+            double[][] Pontos = new double[faces.get(l).get_pontos().length][4];;
+            int[][] P = new int[faces.get(l).get_pontos().length][4];
             int[][] L = faces.get(l).get_m_l();
             //color cor_linha = color(255,255,255);
-            int[] ponto = new int[4];
-            int soma;
-            int H ,W ,P, M, dxdz,dydz;
+            double[] ponto = new double[4];
+            double soma;
+            int H ,W , M, dxdz,dydz;
             
                   W = planoObj[1] - planoObj[0];
                   H = planoObj[3] - planoObj[2];
-                  P = planoObj[5] - planoObj[4];
+                  //P = planoObj[5] - planoObj[4];
                   M = min(width/W,height/H);
                   dxdz = (width - W*M)/2;
                   dydz = (height - H*M)/2;
             
-            float[][] matriz_Pcav = {{1,0,0,0},{0,1,0,0},{(sqrt(2)/2),(sqrt(2)/2),1,0},{0,0,0,1}};//matriz de projeção cavaleira
-            float[][] matriz_Pcab = {{1,0,0,0},{0,1,0,0},{(sqrt(2)/4),(sqrt(2)/4),1,0},{0,0,0,1}};//matriz de projeção cabinete
-            float[][] matriz_Paxo = {{0.707,0.408,0,0},{0,0.816,0,0},{0.707,-0.408,1,0},{0,0,0,1}};//matriz de projeção axonometrica
-            float[][] matriz_P1p = {{1,0,0,0},{0,1,0,0},{0,0,1,1/400.0},{0,0,0,1}};//matriz com um ponto de fuga
-            float[][] matriz_P2p = {{1,0,0,1/300.0},{0,1,0,0},{0,0,1,1/400.0},{0,0,0,1}};//matriz com dois pontos de fuga
-            float[][] matriz_esc = new float[4][4];
+            double[][] matriz_Pcav = {{1,0,0,0},{0,1,0,0},{(sqrt(2)/2),(sqrt(2)/2),1,0},{0,0,0,1}};//matriz de projeção cavaleira
+            double[][] matriz_Pcab = {{1,0,0,0},{0,1,0,0},{(sqrt(2)/4),(sqrt(2)/4),1,0},{0,0,0,1}};//matriz de projeção cabinete
+            double[][] matriz_Paxo = {{0.707,0.408,0,0},{0,0.816,0,0},{0.707,-0.408,1,0},{0,0,0,1}};//matriz de projeção axonometrica
+            double[][] matriz_P1p = {{1,0,0,0},{0,1,0,0},{0,0,1,1/400.0},{0,0,0,1}};//matriz com um ponto de fuga
+            double[][] matriz_P2p = {{1,0,0,1/300.0},{0,1,0,0},{0,0,1,1/400.0},{0,0,0,1}};//matriz com dois pontos de fuga
+            double[][] matriz_esc = new double[4][4];
             
                  switch(flagproj){
                      case 0:
@@ -146,22 +147,22 @@ void projecao(ArrayList<Face> faces,int[] planoObj){
           
             
             //matrizes usadas para passar do plano do objeto para o plano do dispositivo
-            float[][] matriz_R1 = {{1,0,0,0},{0,1,0,0},{0,0,1,0},{-planoObj[0],planoObj[3],planoObj[5],1}};
-            float[][] matriz_R2 = {{1,0,0,0},{0,-1,0,0},{0,0,-1,0},{0,0,0,1}};
-            float[][] matriz_R3 = {{M,0,0,0},{0,M,0,0},{0,0,M,0},{0,0,0,1}};
-            float[][] matriz_R4 = {{1,0,0,0},{0,1,0,0},{0,0,1,0},{dxdz,dydz,0,1}};
+            double[][] matriz_R1 = {{1,0,0,0},{0,1,0,0},{0,0,1,0},{-planoObj[0],planoObj[3],planoObj[5],1}};
+            double[][] matriz_R2 = {{1,0,0,0},{0,-1,0,0},{0,0,-1,0},{0,0,0,1}};
+            double[][] matriz_R3 = {{M,0,0,0},{0,M,0,0},{0,0,M,0},{0,0,0,1}};
+            double[][] matriz_R4 = {{1,0,0,0},{0,1,0,0},{0,0,1,0},{dxdz,dydz,0,1}};
           
                   
                  for(int i = 0; i < faces.get(l).get_pontos().length; i ++){
-                        Pontos[i][0] = int(faces.get(l).get_m_p()[i][0]);
-                        Pontos[i][1] = int(faces.get(l).get_m_p()[i][1]); 
-                        Pontos[i][2] = int(faces.get(l).get_m_p()[i][2]); 
-                        Pontos[i][3] = 1;  
+                        Pontos[i][0] = faces.get(l).get_m_p()[i][0];
+                        Pontos[i][1] = faces.get(l).get_m_p()[i][1]; 
+                        Pontos[i][2] = faces.get(l).get_m_p()[i][2]; 
+                        Pontos[i][3] = (double)1;  
                   }
                   
                
                 for(int i = 0; i < faces.get(l).get_pontos().length; i++){//aplica a projeção nos pontos do objeto, passando para o plano do dispositivo
-           
+                   
                     ponto[0] = Pontos[i][0];
                     ponto[1] = Pontos[i][1];
                     ponto[2] = Pontos[i][2];
@@ -171,7 +172,7 @@ void projecao(ArrayList<Face> faces,int[] planoObj){
                             soma = 0;
                             for(int k = 0; k < 4; k++){
                               
-                                 soma = soma + int((ponto[k]*matriz_esc[k][j]));
+                                 soma = soma + (ponto[k]*matriz_esc[k][j]);
                  
                              }
                             Pontos[i][j] = soma;
@@ -193,7 +194,7 @@ void projecao(ArrayList<Face> faces,int[] planoObj){
                         for(int j = 0; j < 4; j++){
                             soma = 0;
                             for(int k = 0; k < 4; k++){
-                                 soma = soma + int((ponto[k]*matriz_R2[k][j]));
+                                 soma = soma + (ponto[k]*matriz_R2[k][j]);
                              }
                             Pontos[i][j] = soma;
                          }
@@ -206,7 +207,7 @@ void projecao(ArrayList<Face> faces,int[] planoObj){
                         for(int j = 0; j < 4; j++){
                             soma = 0;
                             for(int k = 0; k < 4; k++){
-                                 soma = soma + int((ponto[k]*matriz_R1[k][j]));
+                                 soma = soma + (ponto[k]*matriz_R1[k][j]);
                              }
                             Pontos[i][j] = soma;
                          }
@@ -219,7 +220,7 @@ void projecao(ArrayList<Face> faces,int[] planoObj){
                         for(int j = 0; j < 4; j++){
                             soma = 0;
                             for(int k = 0; k < 4; k++){
-                                 soma = soma + int((ponto[k]*matriz_R3[k][j]));
+                                 soma = soma + (ponto[k]*matriz_R3[k][j]);
                              }
                             Pontos[i][j] = soma;
                          }
@@ -232,7 +233,7 @@ void projecao(ArrayList<Face> faces,int[] planoObj){
                         for(int j = 0; j < 4; j++){
                             soma = 0;
                             for(int k = 0; k < 4; k++){
-                                 soma = soma + int((ponto[k]*matriz_R4[k][j]));
+                                 soma = soma + (ponto[k]*matriz_R4[k][j]);
                              }
                             Pontos[i][j] = soma;
                          }
@@ -247,10 +248,18 @@ void projecao(ArrayList<Face> faces,int[] planoObj){
                               }
                        }
                        
+                                     
+                 for(int i = 0; i < faces.get(l).get_pontos().length; i ++){
+                        P[i][0] = (int)Pontos[i][0];
+                        P[i][1] = (int)Pontos[i][1]; 
+                        P[i][2] = (int)Pontos[i][2]; 
+                        P[i][3] = (int)Pontos[i][2];  
+                  }
+                       
                        
                
                
-             desenhaPoligono(Pontos,L,faces.get(l).get_pontos().length,faces.get(l).get_rgb_linha(),faces.get(l).get_normal(),faces.get(l).get_rgb_fundo());
+             desenhaPoligono(P,L,faces.get(l).get_pontos().length,faces.get(l).get_rgb_linha(),faces.get(l).get_normal(),faces.get(l).get_rgb_fundo());
              /*for(int i = 0; i < objeto.get_N_lados(); i++){
                 linhaDDA(int(Pontos[(L[i][0])-1][0]),int(Pontos[(L[i][0])-1][1]),int(Pontos[(L[i][1])-1][0]),int(Pontos[(L[i][1])-1][1]),cor_linha);
                 
@@ -272,13 +281,13 @@ void projecao(ArrayList<Face> faces,int[] planoObj){
 
 //função que translada um objeto 3d
 //#############################################################################################################################################################################
-void translacao(objeto_3d objeto,float[] T){
+void translacao(objeto_3d objeto,double[] T){
 
-  float[][] P = objeto.get_pontos();
-  float[] posicao = {objeto.get_posicao()[0],objeto.get_posicao()[1],objeto.get_posicao()[2]};
-  float[][] matriz_T = {{1,0,0,0},{0,1,0,0},{0,0,1,0},{T[0],T[1],T[2],1}};//matriz de translação
-  float[][] ponto = new float[1][4];
-  float soma;
+  double[][] P = objeto.get_pontos();
+  double[] posicao = {objeto.get_posicao()[0],objeto.get_posicao()[1],objeto.get_posicao()[2]};
+  double[][] matriz_T = {{1,0,0,0},{0,1,0,0},{0,0,1,0},{T[0],T[1],T[2],1}};//matriz de translação
+  double[][] ponto = new double[1][4];
+  double soma;
   
   //verifica se a translação não faz o objeto ultrapassar os limites do seu sistema de coordenadas.
   //if(!(posicao[0] + T[0] > objeto.get_planoObj()[1] || posicao[0] + T[0] < objeto.get_planoObj()[0] || posicao[1] + T[1] > objeto.get_planoObj()[3] || posicao[1] + T[1] < objeto.get_planoObj()[2] || posicao[2] + T[2] > objeto.get_planoObj()[5] || posicao[2] + T[2] < objeto.get_planoObj()[4])){
@@ -320,15 +329,15 @@ void translacao(objeto_3d objeto,float[] T){
 
 //função que escala um objeto 3d
 //#############################################################################################################################################################################
-void escala(objeto_3d objeto,float[] S){
+void escala(objeto_3d objeto,double[] S){
 
-  float[][] P = objeto.get_pontos();
-  float[][] aux = new float[objeto.get_N_pontos()][3];
-  float[][] aux2 = new float[1][3];
-  float[] posicao = {objeto.get_posicao()[0],objeto.get_posicao()[1],objeto.get_posicao()[2]};//posição inicial do objeto
-  float[][] matriz_S = {{S[0],0,0,0},{0,S[1],0,0},{0,0,S[2],0},{0,0,0,1}};//matriz de escala
-  int[] ponto = new int[4];
-  int soma;
+  double[][] P = objeto.get_pontos();
+  double[][] aux = new double[objeto.get_N_pontos()][3];
+  double[][] aux2 = new double[1][3];
+  double[] posicao = {objeto.get_posicao()[0],objeto.get_posicao()[1],objeto.get_posicao()[2]};//posição inicial do objeto
+  double[][] matriz_S = {{S[0],0,0,0},{0,S[1],0,0},{0,0,S[2],0},{0,0,0,1}};//matriz de escala
+  double[] ponto = new double[4];
+  double soma;
   boolean flag = false;
   boolean teste = false;
   
@@ -347,17 +356,17 @@ void escala(objeto_3d objeto,float[] S){
       for(int i = 0; i < objeto.get_N_pontos(); i++){//aplica a escala no objeto
           
             //calculos realizados para não perder valor de poto flutuante
-            ponto[0] = int(P[i][0]);
+            ponto[0] = P[i][0];
             aux2[0][0] = P[i][0] - ponto[0];
-            ponto[1] = int(P[i][1]);
+            ponto[1] = P[i][1];
             aux2[0][1] = P[i][1] - ponto[1];
-            ponto[2] = int(P[i][2]);
+            ponto[2] = P[i][2];
             aux2[0][2] = P[i][2] - ponto[2];
             
               for(int j = 0; j < 4; j++){
                   soma = 0;
                     for(int k = 0; k < 4; k++){
-                       soma = soma + int((ponto[k]*matriz_S[k][j]));
+                       soma = soma + (ponto[k]*matriz_S[k][j]);
                     }
                     
                      /* if(soma == 0){
@@ -384,20 +393,21 @@ void escala(objeto_3d objeto,float[] S){
                     
                     
                     if(j < 3){
-                        aux[i][j] = aux2[0][j] + soma;
+                       // aux[i][j] = aux2[0][j] + soma;
+                       P[i][j] = soma;
                     }
                }
   
        }
        
        
-      if(teste != true){
+      /*if(teste != true){
           for(int i = 0; i < objeto.get_N_pontos(); i++){
                for(int j = 0; j < 3; j++){
                   P[i][j] = aux[i][j];    
                }     
           }
-      }
+      }*/
        
       
       if(flag){//devolve o objeto para a posição original
@@ -415,19 +425,19 @@ void escala(objeto_3d objeto,float[] S){
 
 //função que rotaciona um objeto 3d
 //#############################################################################################################################################################################
-void rotacao(objeto_3d objeto,float[] R){
+void rotacao(objeto_3d objeto,double[] R){
 
-  float[][] P = objeto.get_pontos();
-  float[] posicao = {objeto.get_posicao()[0],objeto.get_posicao()[1],objeto.get_posicao()[2]};//posição inicial do objeto
-  float[][] matriz_Rx = {{1,0,0,0},{0,cos(radians(R[0])),sin(radians(R[0])),0},{0,-sin(radians(R[0])),cos(radians(R[0])),0},{0,0,0,1}};//matriz para rotacionar no eixo x
-  float[][] matriz_Ry = {{cos(radians(R[1])),0,-sin(radians(R[1])),0},{0,1,0,0},{sin(radians(R[1])),0,cos(radians(R[1])),0},{0,0,0,1}};//matriz para rotacionar no eixo y
-  float[][] matriz_Rz = {{cos(radians(R[2])),sin(radians(R[2])),0,0},{-sin(radians(R[2])),cos(radians(R[2])),0,0},{0,0,1,0},{0,0,0,1}};//matriz para rotacionar no eixo z
-  float[] ponto = new float[4];
-  float soma;
+  double[][] P = objeto.get_pontos();
+  double[] posicao = {objeto.get_posicao()[0],objeto.get_posicao()[1],objeto.get_posicao()[2]};//posição inicial do objeto
+  double[][] matriz_Rx = {{1,0,0,0},{0,cos(radians((float)R[0])),sin(radians((float)R[0])),0},{0,-sin(radians((float)R[0])),cos(radians((float)R[0])),0},{0,0,0,1}};//matriz para rotacionar no eixo x
+  double[][] matriz_Ry = {{cos(radians((float)R[1])),0,-sin(radians((float)R[1])),0},{0,1,0,0},{sin(radians((float)R[1])),0,cos(radians((float)R[1])),0},{0,0,0,1}};//matriz para rotacionar no eixo y
+  double[][] matriz_Rz = {{cos(radians((float)R[2])),sin(radians((float)R[2])),0,0},{-sin(radians((float)R[2])),cos(radians((float)R[2])),0,0},{0,0,1,0},{0,0,0,1}};//matriz para rotacionar no eixo z
+  double[] ponto = new double[4];
+  double soma;
   boolean flag = false;
   
  
-  ponto[3] = 1;
+  ponto[3] = (double)1;
  
       if(!(posicao[0] == 0 && posicao[1] == 0 && posicao[2] == 0)){//verifica se o objeto está na origem no sistema do universo, se não estiver, coloca o objeto na origem
               
@@ -514,14 +524,13 @@ void rotacao(objeto_3d objeto,float[] R){
 }
 //#############################################################################################################################################################################
 
-
 void desenhaPoligono(int[][] P, int[][] L,int n, color cor_linha, boolean preenche, color cor_preenchimento){
   
 //Este laço é responsavel por desenhar o poligono
 //#########################################################################################################################################################################################
 
    stroke(cor_linha);
-   for(int i = 0; i < n; i++){
+   for(int i = 0; i< n; i++){
      
       linhaDDA(P[L[i][0]][0],P[L[i][0]][1],P[L[i][1]][0],P[L[i][1]][1],cor_linha);
 
@@ -531,7 +540,7 @@ void desenhaPoligono(int[][] P, int[][] L,int n, color cor_linha, boolean preenc
    
    if(preenche){// Se o valor da variavel preenche for verdadeiro, o poligono deve ser preechido
    
-  float[][] tabela = new float[n][5];
+  double[][] tabela = new double[n][5];
   IntList pontos = new IntList();
 //#########################################################################################################################################################################################
 
@@ -543,14 +552,14 @@ void desenhaPoligono(int[][] P, int[][] L,int n, color cor_linha, boolean preenc
                      tabela[i][1] = P[L[i][0]][1];
                      tabela[i][2] = P[L[i][1]][1];
                      tabela[i][3] = P[L[i][0]][0];
-                     tabela[i][4] = ((float)P[L[i][0]][0] - (float)P[L[i][1]][0]) / (float)(P[L[i][0]][1] - (float)P[L[i][1]][1]);//calcula o angulo de inclinação do lado
+                     tabela[i][4] = ((double)P[L[i][0]][0] - (double)P[L[i][1]][0]) / (double)(P[L[i][0]][1] - (double)P[L[i][1]][1]);//calcula o angulo de inclinação do lado
            
            }else{
                  if(P[L[i][0]][1] > P[L[i][1]][1]){
                        tabela[i][1] = P[L[i][1]][1];
                        tabela[i][2] = P[L[i][0]][1];
                        tabela[i][3] = P[L[i][1]][0];
-                       tabela[i][4] = ((float)P[L[i][0]][0] - (float)P[L[i][1]][0]) / ((float)P[L[i][0]][1] - (float)P[L[i][1]][1]);//calcula o angulo de inclinação do lado
+                       tabela[i][4] = ((double)P[L[i][0]][0] - (double)P[L[i][1]][0]) / ((double)P[L[i][0]][1] - (double)P[L[i][1]][1]);//calcula o angulo de inclinação do lado
                
                  }else{
                        tabela[i][1] = P[L[i][1]][1];
@@ -567,7 +576,7 @@ void desenhaPoligono(int[][] P, int[][] L,int n, color cor_linha, boolean preenc
 
 //Este laço é responsavél por pintar o poligono   
 //#########################################################################################################################################################################################
-   float x;
+   double x;
    boolean aux;
    for(int y = 0; y < height; y++){//para cada valor de y é verificado quais lados do poligono são atingidos
        
@@ -584,14 +593,14 @@ void desenhaPoligono(int[][] P, int[][] L,int n, color cor_linha, boolean preenc
             
                     if(tabela[i][1] == y){//verifica se y é ponto minimo de um lado, se for esse ponto é adicionado a lista
                  
-                         pontos.append(int(tabela[i][3]));     
+                         pontos.append((int)(tabela[i][3]));     
                         
                      }
             
                     if(y > tabela[i][1] && y < tabela[i][2] ){//verifica se y está dentro do intervalo de uma reta que representa um lado, se estiver calcula um ponto
                          
                          x = tabela[i][4]*(y - tabela[i][1]) + tabela[i][3];
-                         pontos.append(int(x));
+                         pontos.append((int)(x));
                                 
                      }
           

@@ -4,14 +4,14 @@ void calcular_normal_Zmedio(objeto_3d objeto){
 
   for(int i = 0; i < objeto.get_faces().size(); i ++){
         int[] pontos_face = objeto.get_faces().get(i).get_pontos();
-        float x = 0,y = 0,z = 0;
-        float d;
-        float face[][] = new float[pontos_face.length][3];
+        double x = 0,y = 0,z = 0;
+        double d;
+        double face[][] = new double[pontos_face.length][3];
         //float[][]  p = new float[3][3];
-        float p_o[] = {100,100,-200};
-        float l[] = new float[3];
-        float n[] = new float[3];
-        float v;
+        double p_o[] = {100,100,-200};
+        double l[] = new double[3];
+        double n[] = new double[3];
+        double v;
         
          for(int j = 0; j < pontos_face.length; j++){
               face[j][0] = objeto.get_pontos()[pontos_face[j]-1][0];
@@ -32,7 +32,8 @@ void calcular_normal_Zmedio(objeto_3d objeto){
         y = y/face.length;
         z = z/face.length;
         
-        d = sqrt(pow(x,2)+pow(y,2)+pow(z,2));
+        
+        d = Math.sqrt(x*x+y*y+z*z);
         
         objeto.get_faces().get(i).set_z_medio(d);
 

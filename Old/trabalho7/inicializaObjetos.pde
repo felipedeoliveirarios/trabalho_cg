@@ -43,15 +43,20 @@ class inicializaObjetos {
           }
                
                  int[] PLF = int(split(linha[i]," ")); i ++;//recebe a linha do arquivo que corresponde as respectivas quantidades de pontos, lados, e faces
-                 float[][] P = new float[PLF[0]][];//recebe os pontos
+                 double[][] P = new double[PLF[0]][3];//recebe os pontos
                  int[][] L = new int[PLF[1]][];//recebe os lados
                  ArrayList<Face> faces = new ArrayList<Face>();//recebe as faces
-                 float[] fator_T;//recebe o fator de translação inicial do objeto
-                 float[] fator_S;//recebe o fator de escala inicial do objeto
-                 float[] fator_R;//recebe o fator de rotação inicial do objeto
+                 double[] fator_T = new double[3];//recebe o fator de translação inicial do objeto
+                 double[] fator_S = new double[3];//recebe o fator de escala inicial do objeto
+                 double[] fator_R = new double[3];//recebe o fator de rotação inicial do objeto
+                 String parse[] = new String[3];
                 
                     for(int k = 0; k < PLF[0]; k++){//carrega as linhas que contem os pontos 
-                        P[k] = float(split(linha[k+i]," "));
+                        parse = split(linha[k+i]," ");
+                        P[k][0] = Double.parseDouble(parse[0]); 
+                        P[k][1] = Double.parseDouble(parse[1]);  
+                        P[k][2] = Double.parseDouble(parse[2]);
+                       //P[k] = (double)float(split(linha[k+i]," "));
                     }
                     
                     i = i + PLF[0];
@@ -107,9 +112,20 @@ class inicializaObjetos {
                 i = i + PLF[2];
                 
                 //separa as linhas contendo as transformações
-                fator_T = float(split(linha[i]," ")); i++;
-                fator_S = float(split(linha[i]," ")); i++;
-                fator_R = float(split(linha[i]," ")); i++;
+                parse = split(linha[i]," "); i++;
+                fator_T[0] = Double.parseDouble(parse[0]);
+                fator_T[1] = Double.parseDouble(parse[1]);
+                fator_T[2] = Double.parseDouble(parse[2]);
+                
+                parse = split(linha[i]," "); i++;
+                fator_S[0] = Double.parseDouble(parse[0]);
+                fator_S[1] = Double.parseDouble(parse[1]);
+                fator_S[2] = Double.parseDouble(parse[2]);
+                
+                parse = split(linha[i]," "); i++;
+                fator_R[0] = Double.parseDouble(parse[0]);
+                fator_R[1] = Double.parseDouble(parse[1]);
+                fator_R[2] = Double.parseDouble(parse[2]);
            
                 //carrega um novo objeto e executa as transformações iniciais
                 objeto_3d objeto = new objeto_3d(PLF[0], PLF[1], PLF[2], P, L, planoObj, nome, faces, fator_T, fator_S, fator_R);
