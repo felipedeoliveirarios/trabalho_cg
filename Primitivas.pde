@@ -133,6 +133,16 @@ class Linha{
 
 	/*
 	+==========================================================================
+	|		Desenha linhas de acordo a função disponivel no processing (aplicação
+	|		apenas para fins acadêmicos).
+	+==========================================================================
+	*/
+	public static void linhaAnalitico(Vertice inicio, Vertice fim){
+		line(inicio.x,inicio.y,fim.x,fim.y);
+	}
+
+	/*
+	+==========================================================================
 	|		Desenha linhas de acordo com o algoritmo analítico (aplicação
 	|		apenas para fins acadêmicos).
 	+==========================================================================
