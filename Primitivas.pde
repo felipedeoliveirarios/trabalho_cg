@@ -27,9 +27,9 @@ class Vertice{
 	+==========================================================================
 	*/
 	static Vertice calculaMedia(Vertice[] vertices){
-		int x = 0;
-		int y = 0;
-		int z = 0;
+		public int x = 0;
+		public int y = 0;
+		public int z = 0;
 		for(int i = 0; i < vertices.length){
 			x += vertices[i].x;
 			y += vertices[i].y;
@@ -39,6 +39,19 @@ class Vertice{
 		y /= vertices.length;
 		z /= vertices.length;
 		return new Vertice(x, y, z);
+	}
+
+	/*
+	+==========================================================================
+	|		Método estático que ordena um array de vértices de forma 
+	|		DECRESCENTE à partir da amplitude de seu y;
+	+==========================================================================
+	*/
+	static Vertice[] ordenarPorY(Vertice[] vertices){
+		int biggestDY = 0;
+		ArrayList<Vertice> listaDeVertices = new ArrayList<Vertice>(Arrays.asList(vertices));
+		Collections.sort(vertices, Collections.reverseOrder());
+		return listaDeVertices.toArray(new ArrayList(listaDeVertices.size()));		
 	}
 }
 

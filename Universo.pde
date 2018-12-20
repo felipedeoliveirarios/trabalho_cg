@@ -4,11 +4,12 @@
 ###############################################################################
 */
 class Universo {
-	Objeto3D grade;
-	Objeto3D eixoX;
-	Objeto3D eixoY;
-	Objeto3D eixoZ;
-	Objeto3D[] objetos;
+	private Objeto3D grade;
+	private Objeto3D eixoX;
+	private Objeto3D eixoY;
+	private Objeto3D eixoZ;
+	private Objeto3D objetos[];
+	private int numeroDeObjetos;
 
 	Universo(){
 		Vertice[] verticesGrade = new Vertice[40];
@@ -81,6 +82,7 @@ class Universo {
 		arestasEixoZ = null;
 
 		this.objetos = new Objeto3D[MAX_OBJETOS]
+		numeroDeObjetos = 0;
 	}
 
 	/*
@@ -95,5 +97,27 @@ class Universo {
 		Renderizador.Renderizar(eixoY);
 		Renderizador.Renderizar(eixoZ);
 		Renderizador.Renderizar(objetos);
+	}
+	/*
+	+==========================================================================
+	|		Método que adiciona um objeto ao universo.
+	+==========================================================================
+	*/
+	public void addObjeto(Objeto3D objeto){
+		if (numeroDeObjetos < MAX_OBJETOS){
+			objetos[numeroDeObjetos] = objeto;
+			numeroDeObjetos++;
+		} else {
+			System.out.println("Número máximo de objetos alcançado.");
+		}
+	}
+
+	/*
+	+==========================================================================
+	|		Método que retorna os objetos do universo.
+	+==========================================================================
+	*/
+	public Objeto[] getObjetos(){
+		return objetos;
 	}
 }

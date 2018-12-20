@@ -4,7 +4,11 @@
 ###############################################################################
 */
 class Constantes{
-	public int MAX_OBJETOS = 10;
+	public final int MAX_OBJETOS = 10;
+	public final int MAX_AMPLITUDE_ACIDENTES = 50;
+	public final int MAX_NUM_ACIDENTES = 10;
+	public final int NUM_VERTICES_TERRENO = 100;
+	public final double FATOR_DE_SUAVIZAÇÃO_BASE = 0.6;
 
 	/*
 	+==========================================================================
