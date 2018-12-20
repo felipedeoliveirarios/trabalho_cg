@@ -113,11 +113,12 @@ class Poliedro extends Poligono{
 	+==========================================================================
 	*/
 	public Matriz matrizDeVertices(){
-		Matriz matrizDeVertices = new Matriz(vertices.length, 3);
+		Matriz matrizDeVertices = new Matriz(vertices.length, 4);
 		for(int indice = 0; indice < vertices.length; indice++){
 			matrizDeVertices.dados[indice][0] = vertices[indice].x;
 			matrizDeVertices.dados[indice][1] = vertices[indice].y;
 			matrizDeVertices.dados[indice][2] = vertices[indice].z;
+			matrizDeVertices.dados[indice][3] = 1;
 		}
 		return matrizDeVertices;
 	}
