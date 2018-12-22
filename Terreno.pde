@@ -9,21 +9,20 @@ class Terreno{
 			verticesTerreno[indice] = new Vertice((indiceX * numVerticesPorLado) - (NUM_VERTICES_TERRENO / 2), 0, (indiceZ * numVerticesPorLado) - (NUM_VERTICES_TERRENO / 2)); //Cria um vértice sobre o plano XZ
 
 		}
-		Aresta[] arestasTerreno = new Aresta[180];
+		Aresta[] arestasTerreno = new Aresta[(numVerticesPorLado * (int)(numVerticesPorLado - 1)) * 2];
 		int indiceAresta = 0;
-		for (indiceX = 0; indiceX < numVerticesPorLado; indiceX++){ //ARESTAS "VERTICAIS"
-			for (indiceZ = 0; indiceZ < (numVerticesPorLado - 1); indiceZ++){
-				arestasTerreno[indiceAresta] = new Aresta((numVerticesPorLado * indiceX) + indiceZ, (numVerticesPorLado * indiceX) + (indiceZ + 1));
-				indiceAresta++;
-			}
-		}
-
-		for (indiceZ = 0; indiceZ < numVerticesPorLado; indiceZ++){ //ARESTAS "HORIZONTAIS"
-			for (indiceX = 0; indiceX < (numVerticesPorLado - 1); indiceX++){
-				arestasTerreno[indiceAresta] = new Aresta((numVerticesPorLado * indiceX) + indiceZ, (numVerticesPorLado * (indiceX + 1)) + (indiceZ));
-				indiceAresta++;
-			}
-		}
+    
+    for(int indice = 0; indice < (verticesTerreno.length - 1); indice++){
+      if((indice + 1) % 20 != 0){
+        arestasTerreno[indiceAresta] = new Aresta(indice, indice + 1);
+        indiceAresta++;
+      }
+    }
+    
+    for(int indice = 0; indice < (verticesTerreno.length - numVerticesPorLado); indice++){
+        arestasTerreno[indiceAresta] = new Aresta(indice, indice + numVerticesPorLado);
+        indiceAresta++;
+    }
 
 		Objeto3D terreno = new Objeto3D(new Poliedro(verticesTerreno, arestasTerreno));
 		return terreno;
