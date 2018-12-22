@@ -1,3 +1,6 @@
+import java.util.Collections;
+import java.util.Arrays;
+
 /*
 ###############################################################################
 #	CONJUNTO DE CLASSES DE PRIMITIVAS
@@ -26,11 +29,11 @@ class Vertice{
 	|		de vértices.
 	+==========================================================================
 	*/
-	static Vertice calculaMedia(Vertice[] vertices){
-		public int x = 0;
-		public int y = 0;
-		public int z = 0;
-		for(int i = 0; i < vertices.length){
+	public Vertice calculaMedia(Vertice[] vertices){
+		int x = 0;
+		int y = 0;
+		int z = 0;
+		for(int i = 0; i < vertices.length; i++){
 			x += vertices[i].x;
 			y += vertices[i].y;
 			z += vertices[i].z;
@@ -47,11 +50,11 @@ class Vertice{
 	|		DECRESCENTE à partir da amplitude de seu y;
 	+==========================================================================
 	*/
-	static Vertice[] ordenarPorY(Vertice[] vertices){
+	public Vertice[] ordenarPorY(Vertice[] vertices){
 		int biggestDY = 0;
 		ArrayList<Vertice> listaDeVertices = new ArrayList<Vertice>(Arrays.asList(vertices));
-		Collections.sort(vertices, Collections.reverseOrder());
-		return listaDeVertices.toArray(new ArrayList(listaDeVertices.size()));		
+		Collections.sort(listaDeVertices, Collections.reverseOrder());
+		return listaDeVertices.toArray(new Vertice[listaDeVertices.size()]);		
 	}
 }
 
@@ -79,8 +82,8 @@ class Poligono{
 	public Vertice[] vertices;
 	public Aresta[] arestas;
 	public Vertice centro;
-	public Color corDaLinha;
-	public Color corDePreenchimento;
+	public color corDaLinha;
+	public color corDePreenchimento;
 
 	public Poligono(Vertice[] vertices, Aresta[] arestas){
 		this.vertices = vertices;
@@ -98,7 +101,7 @@ class Face{
 	public int[] indiceVertices; // Índice dos vértices que compõem a face.
 	public int[] indiceArestas; // Índice das arestas que compõem a face.
 	public Vertice centro; // Vértice central da face.
-	public Color Preenchimento; // Cor RGBA de preenchimento da face.
+	public color Preenchimento; // Cor RGBA de preenchimento da face.
 
 	public Face(int[] indiceVertices, int[] indiceArestas){
 		this.indiceVertices = indiceVertices;
@@ -115,8 +118,7 @@ class Poliedro extends Poligono{
 	public Face[] faces;
 
 	Poliedro(Vertice[] vertices, Aresta[] arestas){
-		this.vertices = vertices;
-		this.arestas = arestas;
+    super(vertices, arestas);
 	}
 
 	/*
@@ -150,50 +152,8 @@ class Linha{
 	|		apenas para fins acadêmicos).
 	+==========================================================================
 	*/
-	public static void linhaAnalitico(Vertice inicio, Vertice fim){
+	public void linha(Vertice inicio, Vertice fim){
 		line(inicio.x,inicio.y,fim.x,fim.y);
-	}
-
-	/*
-	+==========================================================================
-	|		Desenha linhas de acordo com o algoritmo analítico (aplicação
-	|		apenas para fins acadêmicos).
-	+==========================================================================
-	*/
-	public static void linhaAnalitico(Vertice inicio, Vertice fim){
-
-	}
-
-	/*
-	+==========================================================================
-	|		Desenha linhas de acordo com o algoritmo de análise diferencial
-	| 		digital(DDA). É lento por fazer cálculos contínuos em 
-	|		Vertice-flutuante.
-	+==========================================================================
-	*/
-	public static void linhaDDA(Vertice inicio, Vertice fim){
-
-	}
-
-	/*
-	+==========================================================================
-	|		Desenha linhas de acordo com o algoritmo de rasterização de 
-	|		Bresenham, atualizado para atender a todos os octantes.
-	+==========================================================================
-	*/
-	public static void linhaBresenham(Vertice inicio, Vertice fim){
-
-	}
-
-	/*
-	+==========================================================================
-	|		Desenha uma circunferência, dados seu ponto central e raio,
-	|		segundo o algoritmo de Bresenham, atualizado para atender a todos
-	|		os octantes.
-	+==========================================================================
-	*/
-	public static void circunferenciaBresenham(Vertice centro, int raio){
-
 	}
 }
 
@@ -208,7 +168,7 @@ class Preenchimento{
 	|		Preenche um polígono utilizando o algoritmo boundary-fill.
 	+==========================================================================
 	*/
-	public static void boundaryFill(Poligono poligono){
+	public void boundaryFill(Poligono poligono){
 
 	}
 
@@ -217,7 +177,7 @@ class Preenchimento{
 	|		Preenche um polígono utilizando o algoritmo de scanlines
 	+==========================================================================
 	*/
-	public static void scanlines(Poligono poligono){
+	public void scanlines(Poligono poligono){
 
 	}
 }
@@ -234,7 +194,7 @@ class Renderizador{
 	|		especificado no objeto (padrão: PERSPECTIVA_COM_UM_PF)
 	+==========================================================================
 	*/
-	public static void Renderizar(Objeto3D){
+	public void Renderizar(Objeto3D objeto){
 
 	}
 
@@ -244,7 +204,7 @@ class Renderizador{
 	|		ponto central.
 	+==========================================================================
 	*/
-	public static void Renderizar(Objeto3D[]){
+	public void Renderizar(Objeto3D[] arrayDeObjetos){
 
 	}
 }

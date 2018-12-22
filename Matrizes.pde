@@ -11,6 +11,7 @@ class Matriz{
 	public Matriz(int linhas, int colunas){
 		this.linhas = linhas;
 		this.colunas = colunas;
+    dados = new float[linhas][colunas];
 	}
 	/*
 	+==========================================================================
@@ -34,7 +35,7 @@ class Matriz{
 	|		mesma dimensão.
 	+==========================================================================
 	*/
-	public Matriz somar(Matrix fator){
+	public Matriz somar(Matriz fator){
 		assert((this.linhas == fator.linhas) && 
 			(this.colunas == fator.colunas));
 		Matriz resultante = new Matriz(this.linhas, fator.colunas);
@@ -54,7 +55,7 @@ class Matriz{
 	|		mesma dimensão.
 	+==========================================================================
 	*/
-	public Matriz subtrair(Matrix fator){
+	public Matriz subtrair(Matriz fator){
 		assert((this.linhas == fator.linhas) && 
 			(this.colunas == fator.colunas));
 		Matriz resultante = new Matriz(this.linhas, fator.colunas);
@@ -75,7 +76,7 @@ class Matriz{
 	|		matriz dada como argumento.
 	+==========================================================================
 	*/
-	public Matriz multilpicar(Matrix fator){
+	public Matriz multilpicar(Matriz fator){
 		assert(this.colunas == fator.linhas);
 		Matriz resultante = new Matriz(this.linhas, fator.colunas);
 		for(int linha = 0; linha < resultante.linhas; linha++){

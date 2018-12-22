@@ -9,17 +9,20 @@ class Objeto3D{
 	private Matriz rotacao;
 	private Matriz translacao;
 	private Poliedro prontoParaRenderizar;
-	private Renderizador renderizador;
+	private METODO_DE_RENDERIZACAO renderizador;
 
 	public Objeto3D(Poliedro poliedro){
 		this.poliedro = poliedro;
 		this.escala = new Matriz(1, 3);
-		this.escala.dados[0] = {1.0, 1.0, 1.0};
+    float[][] matrizDeDadosEscala = {{1.0f, 1.0f, 1.0f}};
+		this.escala.dados = matrizDeDadosEscala;
 		this.rotacao = new Matriz(1, 3);
-		this.rotacao.dados[0] = {0.0, 0.0, 0.0};
+    float[][] matrizDeDadosRotacao = {{0.0f, 0.0f, 0.0f}};
+		this.rotacao.dados = matrizDeDadosRotacao;
 		this.translacao = new Matriz(1, 3);
-		this.translacao.dados[0] = {0.0, 0.0, 0.0};
-		this.renderizador = Renderizador.PERSPECTIVA_COM_UM_PF;
+    float[][] matrizDeDadosTranslacao = {{0.0f, 0.0f, 0.0f}};
+		this.translacao.dados = matrizDeDadosTranslacao;
+		this.renderizador = METODO_DE_RENDERIZACAO.PERSPECTIVA_COM_UM_PF;
 	}
 
 	/*
@@ -68,3 +71,4 @@ class Objeto3D{
 	public void aplicarOperacoes(){
 		// Faz as operações e salva na variável prontoParaRenderizar.
 	}
+}

@@ -12,13 +12,13 @@ class Universo {
 	private int numeroDeObjetos;
 
 	Universo(){
-		Vertice[] verticesGrade = new Vertice[40];
+		Vertice[] verticesGrade = new Vertice[44];
 		int indiceVertice = 0;
 		for(int x = -50; x <= 50; x += 10){ // Gera os vértices das linhas "verticais" da grade.
 			verticesGrade[indiceVertice] = new Vertice(x, 0, -50);
-			indiceVertice++;
+      indiceVertice++;
 			verticesGrade[indiceVertice] = new Vertice(x, 0, 50);
-			indiceVertice++;
+      indiceVertice++;
 		}
 		for(int z = -50; z <= 50; z += 10){// Gera os vértices das linhas "horizontais" da grade.
 			verticesGrade[indiceVertice] = new Vertice(-50, 0, z);
@@ -27,12 +27,12 @@ class Universo {
 			indiceVertice++;
 		}
 
-		Aresta[] arestasGrade = new Aresta[20];
-		for(indiceVertice = 0; indiceVertice < 40; indiceVertice += 2){
-			arestasGrade[20] = new Aresta(indiceVertice, indiceVertice + 1);
+		Aresta[] arestasGrade = new Aresta[22];
+		for(int indiceAresta = 0; indiceAresta < 21; indiceAresta += 2){
+			arestasGrade[indiceAresta] = new Aresta(indiceAresta, indiceAresta + 1);
 		}
 
-		this.grade = new Objeto3D(verticesGrade, arestasGrade);
+		this.grade = new Objeto3D(new Poliedro(verticesGrade, arestasGrade));
 		verticesGrade = null;
 		arestasGrade = null;
 
@@ -45,8 +45,8 @@ class Universo {
 		arestasEixoX[0] = new Aresta(0, 1);
 		arestasEixoX[1] = new Aresta(2, 1);
 		arestasEixoX[2] = new Aresta(3, 1);
-		this.eixoX = new Objeto3D(verticesEixoX, arestasEixoX);
-		eixoX.poliedro.corDaLinha = Color.RED;
+		this.eixoX = new Objeto3D(new Poliedro(verticesEixoX, arestasEixoX));
+		eixoX.poliedro.corDaLinha = color(255, 0, 0);
 		eixoX.poliedro.faces = null;
 		verticesEixoX = null;
 		arestasEixoX = null;
@@ -60,8 +60,8 @@ class Universo {
 		arestasEixoY[0] = new Aresta(0, 1);
 		arestasEixoY[1] = new Aresta(2, 1);
 		arestasEixoY[2] = new Aresta(3, 1);
-		this.eixoY = new Objeto3D(verticesEixoY, arestasEixoY);
-		eixoY.poliedro.corDaLinha = Color.GREEN;
+		this.eixoY = new Objeto3D(new Poliedro(verticesEixoY, arestasEixoY));
+		eixoY.poliedro.corDaLinha = color(0, 255, 0);
 		eixoY.poliedro.faces = null;
 		verticesEixoY = null;
 		arestasEixoY = null;
@@ -75,13 +75,13 @@ class Universo {
 		arestasEixoZ[0] = new Aresta(0, 1);
 		arestasEixoZ[1] = new Aresta(2, 1);
 		arestasEixoZ[2] = new Aresta(3, 1);
-		this.eixoZ = new Objeto3D(verticesEixoZ, arestasEixoZ);
-		eixoZ.poliedro.corDaLinha = Color.BLUE;
+		this.eixoZ = new Objeto3D(new Poliedro(verticesEixoZ, arestasEixoZ));
+		eixoZ.poliedro.corDaLinha = color(0, 0, 255);
 		eixoZ.poliedro.faces = null;
 		verticesEixoZ = null;
 		arestasEixoZ = null;
 
-		this.objetos = new Objeto3D[MAX_OBJETOS]
+		this.objetos = new Objeto3D[MAX_OBJETOS];
 		numeroDeObjetos = 0;
 	}
 
@@ -92,11 +92,12 @@ class Universo {
 	+==========================================================================
 	*/
 	public void Render(){
-		Renderizador.Renderizar(grade);
-		Renderizador.Renderizar(eixoX);
-		Renderizador.Renderizar(eixoY);
-		Renderizador.Renderizar(eixoZ);
-		Renderizador.Renderizar(objetos);
+    Renderizador renderizador = new Renderizador();
+		renderizador.Renderizar(grade);
+		renderizador.Renderizar(eixoX);
+		renderizador.Renderizar(eixoY);
+		renderizador.Renderizar(eixoZ);
+		renderizador.Renderizar(objetos);
 	}
 	/*
 	+==========================================================================
@@ -117,7 +118,7 @@ class Universo {
 	|		Método que retorna os objetos do universo.
 	+==========================================================================
 	*/
-	public Objeto[] getObjetos(){
+	public Objeto3D[] getObjetos(){
 		return objetos;
 	}
 }
