@@ -67,6 +67,13 @@ class Terreno{
 
 				suavizarVizinhanca(terreno.poliedro.vertices, indiceX, indiceZ, FATOR_DE_SUAVIZACAO_BASE);
 		}
+    for (int indice = verticesOrdenados.length; indice >= 0; indice--){
+      if (verticesOrdenados[indice].y == 0){break;} //finaliza a execução ao alcançar vértices planos.
+        indiceX = (verticesOrdenados[indice].x + (NUM_VERTICES_TERRENO / 2))/numVerticesPorLado;
+        indiceZ = (verticesOrdenados[indice].z + (NUM_VERTICES_TERRENO / 2))/numVerticesPorLado;
+
+        suavizarVizinhanca(terreno.poliedro.vertices, indiceX, indiceZ, FATOR_DE_SUAVIZACAO_BASE);
+    }
 
 	}
 
@@ -106,8 +113,10 @@ class Terreno{
 
 			double novoFator = fator * fator;
 			for(int indiceLoop = 0; indiceLoop < 4; indiceLoop++){ //altera os vizinhos
-				if (vizinhos[indiceLoop] != null && vizinhos[indiceLoop].y < (verticesTerreno[indice].y * fator)){
-				vizinhos[indiceLoop].y = (int)(verticesTerreno[indice].y * fator);
+				if (vizinhos[indiceLoop] != null && //se o vizinho existir
+            abs(vizinhos[indiceLoop].y) < abs((float)(verticesTerreno[indice].y * fator)) && //se o vizinho possuir dy menor que o dy que será definido
+            ((vizinhos[indiceLoop].y >= 0 && verticesTerreno[indice].y >= 0) || (vizinhos[indiceLoop].y <= 0 && verticesTerreno[indice].y <= 0))){ //se tiverem o mesmo sinal
+				vizinhos[indiceLoop].y = (int)((float)verticesTerreno[indice].y * fator);
 				}
 				
 			}

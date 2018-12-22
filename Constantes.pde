@@ -5,9 +5,9 @@
 */
 public final int MAX_OBJETOS = 10;
 public final int MAX_AMPLITUDE_ACIDENTES = 50;
-public final int MAX_NUM_ACIDENTES = 10;
-public final int NUM_VERTICES_TERRENO = 100;
-public final double FATOR_DE_SUAVIZACAO_BASE = 0.6;
+public final int MAX_NUM_ACIDENTES = 20;
+public final int NUM_VERTICES_TERRENO = 400;
+public final double FATOR_DE_SUAVIZACAO_BASE = 0.9;
 /*
 +==========================================================================
 |    Enum que mantém os nomes dos algoritmos de renderização para uso no
