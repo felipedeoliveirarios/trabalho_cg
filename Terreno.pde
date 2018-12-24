@@ -1,4 +1,9 @@
 class Terreno{
+  /*
+  +==========================================================================
+  |    Método que gera uma grade plana.
+  +==========================================================================
+  */
 	public Objeto3D gerarTerrenoPlano(){
 		Vertice[] verticesTerreno = new Vertice[NUM_VERTICES_TERRENO];
 		int numVerticesPorLado = (int)Math.sqrt(NUM_VERTICES_TERRENO);
@@ -13,7 +18,7 @@ class Terreno{
 		int indiceAresta = 0;
     
     for(int indice = 0; indice < (verticesTerreno.length - 1); indice++){
-      if((indice + 1) % 20 != 0){
+      if((indice + 1) % numVerticesPorLado != 0){
         arestasTerreno[indiceAresta] = new Aresta(indice, indice + 1);
         indiceAresta++;
       }
@@ -23,8 +28,28 @@ class Terreno{
         arestasTerreno[indiceAresta] = new Aresta(indice, indice + numVerticesPorLado);
         indiceAresta++;
     }
-
-		Objeto3D terreno = new Objeto3D(new Poliedro(verticesTerreno, arestasTerreno));
+    
+    Face[] facesTerreno = new Face[(numVerticesPorLado - 1) * (numVerticesPorLado - 1)];
+    int indiceVertice = 0;
+    int indiceFace = 0;
+    indiceAresta = 0;
+    int indiceAresta2 = 0;
+    int[] arrayVertices = null;
+    int[] arrayArestas = null;
+    for (int indiceLoop = 0; indiceFace < numVerticesPorLado * (numVerticesPorLado - 1); indiceLoop++){
+      if (indiceFace == facesTerreno.length)break;
+      if((indiceLoop + 1) % numVerticesPorLado != 0){// pula o último de cada linha
+        arrayVertices = new int[]{indiceVertice, indiceVertice + 1, indiceVertice + numVerticesPorLado, indiceVertice + numVerticesPorLado + 1};
+        arrayArestas = new int[]{(indiceAresta), (indiceAresta + (numVerticesPorLado - 1)), (indiceAresta2 + (numVerticesPorLado * (numVerticesPorLado - 1))), (indiceAresta2 + (numVerticesPorLado * (numVerticesPorLado - 1)) + 1)};
+        facesTerreno[indiceFace] = new Face(arrayVertices, arrayArestas, color(0, 0, 0));
+        indiceFace++;        
+        indiceAresta++;
+      }
+      indiceVertice++;
+      indiceAresta2++;
+    }
+		Objeto3D terreno = new Objeto3D(new Poliedro(verticesTerreno, arestasTerreno, facesTerreno));
+    terreno.poliedro.corDaLinha = color(255, 255, 255);
 		return terreno;
 	}
 

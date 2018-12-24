@@ -101,12 +101,18 @@ class Face{
 	public int[] indiceVertices; // Índice dos vértices que compõem a face.
 	public int[] indiceArestas; // Índice das arestas que compõem a face.
 	public Vertice centro; // Vértice central da face.
-	public color Preenchimento; // Cor RGBA de preenchimento da face.
+	public color preenchimento; // Cor RGBA de preenchimento da face.
 
 	public Face(int[] indiceVertices, int[] indiceArestas){
 		this.indiceVertices = indiceVertices;
 		this.indiceArestas = indiceArestas;
 	}
+
+  public Face(int[] indiceVertices, int[] indiceArestas, color preenchimento){
+    this.indiceVertices = indiceVertices;
+    this.indiceArestas = indiceArestas;
+    this.preenchimento = preenchimento;
+  }
 }
 
 /*
@@ -120,6 +126,11 @@ class Poliedro extends Poligono{
 	Poliedro(Vertice[] vertices, Aresta[] arestas){
     super(vertices, arestas);
 	}
+
+  Poliedro(Vertice[] vertices, Aresta[] arestas, Face[] faces){
+    super(vertices, arestas);
+    this.faces = faces;
+  }
 
 	/*
 	+==========================================================================
