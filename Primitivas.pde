@@ -218,4 +218,31 @@ class Renderizador{
 	public void Renderizar(Objeto3D[] arrayDeObjetos){
 
 	}
+
+  /*
+  +==========================================================================
+  |    Retorna o índice das faces que não devem ser renderizadas em um
+  |    arraylist para facilitar testes com o uso do método contains.
+  +==========================================================================
+  */
+  public ArrayList<Integer> blacklistDeFaces(Matriz matrizDeVertices, Face[] faces){
+    ArrayList<Integer> indiceVertices = new ArrayList<Integer>();
+    for (int indice = 0; indice <= matrizDeVertices.dados.length; indice++){
+      if ((matrizDeVertices.dados[indice][0] < 0) || // pixel com x < 0
+          (matrizDeVertices.dados[indice][0] > width) || // pixel com x > width 
+          (matrizDeVertices.dados[indice][1] < 0) || // pixel com y < 0
+          (matrizDeVertices.dados[indice][1] > height)){ // pixel com y > height
+          indiceVertices.add(indice);
+      } 
+    }
+    ArrayList<Integer> indicesFaces = new ArrayList<Integer>();
+    for (int indice = 0; indice <= faces.length; indice++){
+      for (int indice2 = 0; indice2 <= faces[indice].indiceVertices.length; indice2++){
+        if (indiceVertices.contains(faces[indice].indiceVertices[indice2])){
+          indicesFaces.add(indice);
+        }
+      }        
+    }
+    return indicesFaces;
+  }
 }
